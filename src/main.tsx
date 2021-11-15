@@ -2,22 +2,24 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { ChakraProvider, extendTheme } from "@chakra-ui/react"
 import App from './App'
+import "antd/dist/antd.css"
+import "./App.scss"
 
 const theme = extendTheme({
   fonts: {
-    heading: "Montserrat, sans-serif",
-    body: "Montserrat, sans-serif",
+    heading: "Playfair Display, Nunito Sans, sans-serif",
+    body: "Nunito Sans, sans-serif",
   },
   colors: {
     brand: {
-      primary: "#0D677C",
-      primaryTint: "#5594a3",
-      secondary: "#4FB1FE",
-      secondaryTint: "#83c8fe",
-      blue: "#35488B",
-      blueTint: "#717ead",
-      grey: "#F5F5F5",
-      darkgrey: "#EAEAEA",
+      primary: "#546B5C",
+      primaryFade: "#92AC97",
+      secondary: "#573524",
+      secondaryFade: "#887863",
+      dark: "#12130F",
+      midBlack: "#555555",
+      white: "#F3F4F3",
+      midWhite: "#EAEAEA",
     },
   },
 });
