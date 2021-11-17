@@ -17,9 +17,10 @@ const theme = extendTheme({
       secondary: "#573524",
       secondaryFade: "#887863",
       dark: "#12130F",
-      midBlack: "#555555",
+      midDark: "#555555",
       white: "#F3F4F3",
       midWhite: "#EAEAEA",
+      gray: '#EDF2F7'
     },
   },
 });
