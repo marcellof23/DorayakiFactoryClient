@@ -7,8 +7,18 @@ import {
   Stack,
   Button,
 } from "@chakra-ui/react";
+import { TAlertStatus } from "../hooks/useAlert";
 
-const LoginForm = () => {
+const LoginForm = ({
+  showAlert
+}: {
+  showAlert?: (s: TAlertStatus, m: string) => void
+}) => {
+  
+  const onLogin = () => {
+    if (showAlert) showAlert("success", "Login Success!");
+  }
+
   return (
     <Box
       rounded="lg"
@@ -39,6 +49,7 @@ const LoginForm = () => {
             _hover={{
               bg: "brand.primaryFade",
             }}
+            onClick={onLogin}
           >
             Sign in
           </Button>

@@ -1,7 +1,11 @@
 import { Flex, Heading, Text, Stack } from "@chakra-ui/react";
 import LoginForm from "../components/LoginForm";
+import MiniAlert from "../components/MiniAlert";
+import useAlert from "../hooks/useAlert";
 
 const Login = () => {
+  const { isVisible, status, message, showAlert } = useAlert();
+
   return (
     <Flex
       minH="100vh"
@@ -16,7 +20,14 @@ const Login = () => {
             to your factory account
           </Text>
         </Stack>
-        <LoginForm />
+        <MiniAlert
+          visible={isVisible}
+          status={status}
+          message={message}
+        />
+        <LoginForm
+          showAlert={showAlert}
+        />
       </Stack>
     </Flex>
 
