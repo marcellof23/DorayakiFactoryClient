@@ -4,6 +4,7 @@ import { ChakraProvider, extendTheme } from "@chakra-ui/react"
 import App from './App'
 import "antd/dist/antd.css"
 import "./App.scss"
+import { UserProvider } from './context/UserContext'
 
 const theme = extendTheme({
   fonts: {
@@ -28,7 +29,9 @@ const theme = extendTheme({
 ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
-      <App />
+      <UserProvider>
+        <App />
+      </UserProvider>
     </ChakraProvider>
   </React.StrictMode>,
   document.getElementById('root')
