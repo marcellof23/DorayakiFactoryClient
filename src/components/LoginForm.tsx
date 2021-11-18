@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Box,
   FormControl,
@@ -8,15 +9,36 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { TAlertStatus } from "../hooks/useAlert";
+import { authLogin, logout } from "../services/auth";
+import useUser from "../context/UserContext";
 
 const LoginForm = ({
   showAlert
 }: {
   showAlert?: (s: TAlertStatus, m: string) => void
 }) => {
-  
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const { setUser } = useUser();
+
   const onLogin = () => {
-    if (showAlert) showAlert("success", "Login Success!");
+    if (!username || !password) {
+      if (showAlert) showAlert("error", "Username and password are required");
+      return;
+    }
+
+    async function start() {
+      const data = await authLogin(username, password);
+
+      if (data.user) {
+        setUser(data.user);
+      } else {
+        if (showAlert) showAlert("error", data.message || 'Unknown error');
+        logout();
+      }
+    }
+
+    start()
   }
 
   return (
@@ -29,11 +51,19 @@ const LoginForm = ({
       <Stack spacing={4}>
         <FormControl id="username">
           <FormLabel>Username</FormLabel>
-          <Input type="text" />
+          <Input
+            value={username}
+            onChange={e => setUsername(e.target.value)}
+            type="text"
+          />
         </FormControl>
         <FormControl id="password">
           <FormLabel>Password</FormLabel>
-          <Input type="password" />
+          <Input
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            type="password"
+          />
         </FormControl>
         <Stack spacing={4}>
           <Stack
