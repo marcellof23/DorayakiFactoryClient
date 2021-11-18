@@ -5,7 +5,8 @@ const BigAlert = ({
   status,
   title,
   message,
-  visible
+  visible,
+  ...props
 }: {
   status: TAlertStatus;
   title: string;
@@ -16,6 +17,7 @@ const BigAlert = ({
 
   return (
     <Alert
+      {...props}
       status={status}
       variant="subtle"
       flexDirection="column"

@@ -4,7 +4,8 @@ import { TAlertStatus } from "../hooks/useAlert";
 const MiniAlert = ({
   status,
   message,
-  visible
+  visible,
+  ...props
 }: {
   status: TAlertStatus;
   message: string;
@@ -13,7 +14,7 @@ const MiniAlert = ({
   if (!visible) return null;
 
   return (
-    <Alert status={status} variant="left-accent">
+    <Alert {...props} status={status} variant="left-accent">
       <AlertIcon />
       {message}
     </Alert>
