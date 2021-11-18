@@ -34,6 +34,7 @@ const LoginForm = ({
         setUser(data.user);
       } else {
         if (showAlert) showAlert("error", data.message || 'Unknown error');
+        setUser(null);
         logout();
       }
     }

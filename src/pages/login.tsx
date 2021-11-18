@@ -1,10 +1,19 @@
 import { Flex, Heading, Text, Stack } from "@chakra-ui/react";
+import { Redirect } from "react-router-dom";
 import LoginForm from "../components/LoginForm";
 import MiniAlert from "../components/MiniAlert";
+import useUser from "../context/UserContext";
 import useAlert from "../hooks/useAlert";
 
 const Login = () => {
   const { isVisible, status, message, showAlert } = useAlert();
+  const { user, loading } = useUser();
+
+  if (!loading && user) {
+    return (
+      <Redirect to="/dashboard" />
+    )
+  }
 
   return (
     <Flex

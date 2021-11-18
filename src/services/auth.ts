@@ -1,4 +1,3 @@
-import { AxiosError } from 'axios';
 import { IUser } from '../context/UserContext';
 import axios from '../lib/axios';
 

@@ -1,4 +1,3 @@
-import React from "react"
 import { BrowserRouter as Router, Route, RouteProps, Switch } from "react-router-dom";
 import { privateRoutes, routes } from "./routes";
 import PrivateRoute from "./components/PrivateRoute";
