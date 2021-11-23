@@ -10,11 +10,7 @@ import {
 } from 'react';
 import { getAccessToken } from '../lib/axios';
 import { getAuthData, logout } from '../services/auth';
-
-export interface IUser {
-  id: number;
-  username: string;
-}
+import { IUser } from '../utils/interface';
 
 export const UserContext = createContext<{
   user: IUser | null;

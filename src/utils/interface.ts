@@ -1,4 +1,21 @@
-import { UnitEnum } from "./enum";
+import { DorayakiRequestStatus, UnitEnum } from "./enum";
+
+export interface IUser {
+  user_id: number;
+  username: string;
+  name: string;
+  created_at: Date;
+  updated_at: Date;
+}
+
+export interface IRequest {
+  dorayakirequest_id: number;
+  recipe_id: number;
+  qty: number;
+  status: DorayakiRequestStatus;
+  created_at: Date;
+  updated_at: Date;
+}
 
 export interface IIngredient {
   ingredient_id: number;

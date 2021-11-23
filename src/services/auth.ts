@@ -1,4 +1,4 @@
-import { IUser } from '../context/UserContext';
+import { IUser } from '../utils/interface';
 import axios from '../lib/axios';
 
 export const getAuthData = async (): Promise<IUser | null> => {
