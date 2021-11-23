@@ -1,4 +1,5 @@
 import axios from "../lib/axios";
+import { DorayakiRequestStatus } from "../utils/enum";
 import { IRequest } from "../utils/interface";
 
 export const getRequests = async (): Promise<Array<IRequest>> => {
@@ -15,8 +16,17 @@ export const getRequest = async (
   return res.data.data;
 };
 
-export const updateRequest = async (payload: IRequest) => {
+export const updateRequest = async (payload: {
+  dorayakirequest_id: number,
+  status: DorayakiRequestStatus
+}) => {
   const url = `/dorayaki-request/${payload.dorayakirequest_id}`;
-  const res = await axios.put(url, payload);
-  return res.data.data;
+  try {
+    const res = await axios.put(url, {
+      status: payload.status
+    });
+    return res.data.data;
+  } catch (err: any) {
+    return err.response.data.message;
+  }
 };

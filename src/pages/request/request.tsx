@@ -1,14 +1,16 @@
-import { Flex, Heading, Button } from "@chakra-ui/react";
+import { Flex, Heading, Button, VStack } from "@chakra-ui/react";
 import { Table, Input, Button as AntButton, Space, Tag } from "antd";
 import { useState, useEffect, useRef, Key } from "react";
 import Highlighter from 'react-highlight-words';
 import { CheckCircleOutlined, CloseCircleOutlined, ExclamationCircleOutlined, SearchOutlined } from "@ant-design/icons";
 
 import { IRequest } from "../../utils/interface";
-import { getRequests } from "../../services/request";
+import { getRequests, updateRequest } from "../../services/request";
 import { ColumnGroupType, ColumnType } from "antd/lib/table";
 import { FilterConfirmProps } from "antd/lib/table/interface";
 import { DorayakiRequestStatus } from "../../utils/enum";
+import useAlert from "../../hooks/useAlert";
+import MiniAlert from "../../components/MiniAlert";
 
 interface ICombinedRequest extends IRequest {
   recipe_name: string;
@@ -34,6 +36,8 @@ const RequestListPage = () => {
   
   const [searchedText, setSearchedText] = useState<string>("");
   const [searchedColumn, setSearchedColumn] = useState<string>("");
+
+  const { isVisible, status, message, showAlert } = useAlert();
 
   const searchRef = useRef<any>();
 
@@ -143,6 +147,35 @@ const RequestListPage = () => {
       render: (value: DorayakiRequestStatus) => (
         <Tag color={TAGS[value].color} icon={TAGS[value].icon}>{value}</Tag>
       )
+    },
+    {
+      title: 'Action',
+      dataIndex: 'action',
+      render: (_: undefined, record: ICombinedRequest) => {
+        if (record.status === DorayakiRequestStatus.pending) {
+          return (
+            <Space>
+              <Button
+                colorScheme="teal"
+                variant="solid"
+                size="sm"
+                onClick={() => handleUpdate(record.dorayakirequest_id, DorayakiRequestStatus.accepted)}
+              >
+                Accept
+              </Button>
+              <Button
+                colorScheme="red"
+                variant="ghost"
+                size="sm"
+                onClick={() => handleUpdate(record.dorayakirequest_id, DorayakiRequestStatus.denied)}
+              >
+                Deny
+              </Button>
+            </Space>
+          )
+        }
+        return null
+      }
     }
   ];
 
@@ -180,6 +213,29 @@ const RequestListPage = () => {
     setSearchedText('')
   };
 
+  const handleUpdate = async (
+    id: number,
+    type: DorayakiRequestStatus
+  ): Promise<void> => {
+    const res = await updateRequest({
+      dorayakirequest_id: id,
+      status: type
+    })
+    if (typeof res === 'string') {
+      showAlert("error", res);
+    } else {
+      showAlert("success", `Request ID ${id} ${type}`);
+      const newData = Array.from(data)
+        .map(
+          (d: ICombinedRequest) => d.dorayakirequest_id === id ? ({
+            ...d,
+            status: type
+          }) : d
+        )
+      setData(newData)
+    }
+  }
+
   return (
     <Flex
       minH="100vh"
@@ -189,10 +245,19 @@ const RequestListPage = () => {
       direction="column"
     >
       <Heading marginBottom="5vh">Request List</Heading>
-      <Table
-        columns={columns}
-        dataSource={data}
-      />
+      <VStack
+        spacing={5}
+      >
+        <MiniAlert
+          visible={isVisible}
+          status={status}
+          message={message}
+        />
+        <Table
+          columns={columns}
+          dataSource={data}
+        />
+      </VStack>
     </Flex>
   );
 };
