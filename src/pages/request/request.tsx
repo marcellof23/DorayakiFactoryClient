@@ -174,7 +174,7 @@ const RequestListPage = () => {
             </Space>
           )
         }
-        return null
+        return <span>No action available</span>
       }
     }
   ];
@@ -256,6 +256,9 @@ const RequestListPage = () => {
         <Table
           columns={columns}
           dataSource={data}
+          pagination={{
+            pageSize: 10
+          }}
         />
       </VStack>
     </Flex>
