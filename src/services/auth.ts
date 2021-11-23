@@ -1,10 +1,14 @@
 import { IUser } from '../context/UserContext';
 import axios from '../lib/axios';
 
-export const getAuthData = async (): Promise<IUser> => {
-  const res = await axios.get('/auth')
-  const user = res.data.data?.user as IUser;
-  return user;
+export const getAuthData = async (): Promise<IUser | null> => {
+  try {
+    const res = await axios.get('/auth')
+    const user = res.data.data?.user as IUser;
+    return user
+  } catch (err) {
+    return null
+  }
 }
 
 export const authLogin = async (
