@@ -11,7 +11,7 @@ const Login = () => {
 
   if (!loading && user) {
     return (
-      <Redirect to="/dashboard" />
+      <Redirect to="/request" />
     )
   }
 

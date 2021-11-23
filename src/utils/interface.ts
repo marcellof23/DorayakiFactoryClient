@@ -15,6 +15,7 @@ export interface IRequest {
   status: DorayakiRequestStatus;
   created_at: Date;
   updated_at: Date;
+  Recipe: IRecipe;
 }
 
 export interface IIngredient {

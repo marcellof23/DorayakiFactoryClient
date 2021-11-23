@@ -2,7 +2,7 @@ import { RouteProps } from "react-router-dom";
 
 import Home from "./pages/home";
 import Login from "./pages/login";
-import Requests from "./pages/requests";
+import Request from "./pages/request/request";
 import Ingredient from "./pages/ingredient/ingredient";
 import IngredientDetail from "./pages/ingredient/ingredient_detail";
 import Recipe from "./pages/recipe/recipe";
@@ -21,8 +21,8 @@ export const routes: Array<RouteProps> = [
 
 export const privateRoutes: Array<RouteProps> = [
   {
-    path: "/dashboard",
-    component: Requests,
+    path: "/request",
+    component: Request,
   },
   {
     path: "/ingredient",
