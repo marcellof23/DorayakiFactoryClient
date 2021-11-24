@@ -15,6 +15,9 @@ const useAlert = () => {
     setIsVisible(true)
     setStatus(s)
     setMessage(m)
+    setTimeout(() => {
+			setIsVisible(false);
+		}, 2000);
   }
 
   return {

@@ -15,8 +15,11 @@ export const getIngredient = async (
 	return res.data.data;
 };
 
-export const updateIngredient = async (payload: IIngredient) => {
-	const url = `/ingredient/${payload.ingredient_id}`;
+export const updateIngredient = async (
+	ingredient_id: number,
+	payload: IIngredient
+) => {
+	const url = `/ingredient/${ingredient_id}`;
 	const res = await axios.put(url, payload);
 	return res.data.data;
 };

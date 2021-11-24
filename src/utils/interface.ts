@@ -26,7 +26,16 @@ export interface IIngredient {
 }
 
 export interface IRecipe {
-  recipe_id: number;
-  name: string;
-  ingredients: Array<IIngredient>;
+	recipe_id: number;
+	name: string;
+	Ingredients: Array<IIngredientsRecipe>;
+}
+
+export interface IIngredientsRecipe {
+	name: string;
+	unit: UnitEnum;
+	qty_required: number;
+	RecipeIngredient: {
+		qty_required: number;
+	};
 }
