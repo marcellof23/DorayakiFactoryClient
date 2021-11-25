@@ -1,2 +1,54 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+
+.ant-input-number{
+  width: 100%;
+}
+.form{
+  width: 80vw;
+  height: fit-content;
+  padding : 0 10vw;
+}
+.form-row{
+  display: grid;
+  grid-template-columns: 20vw 3fr;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+  div{
+    label, input, textarea{
+      color : black;
+    }
+    text-align: left;
+    color : black;
+}
+  input, textarea{
+    border : 1px solid black;
+    background-color: transparent !important;
+    border-radius: 4px;
+    padding : 8px;
+  }
+  .textarea{
+    min-height: 30vh;
+  }
+}
+.form-row-last{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-end;
+  position: relative;
+  .button{
+    width: fit-content;
+    background-color: #546B5C;
+    color : white;
+    &:hover{
+      background-color: #92AC97;
+    }
+  }
+}
+.ant-form-item-control-input-content{
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}

@@ -23,3 +23,9 @@ export const updateIngredient = async (
 	const res = await axios.put(url, payload);
 	return res.data.data;
 };
+
+export const createIngredient = async (payload: IIngredient) => {
+	const url = `/ingredient`;
+	const res = await axios.post(url, payload);
+	return res.data.data;
+};

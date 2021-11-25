@@ -222,6 +222,15 @@ const Home = () => {
 				<Heading marginBottom='5vh' style={headingstyle}>
 					Ingredient List
 				</Heading>
+				<Flex justify='flex-end' direction='row'>
+					<Typography.Link
+						disabled={editingRow !== -1}
+						onClick={() => history.push("/ingredient/new")}
+					>
+						Add New Ingredient
+					</Typography.Link>
+				</Flex>
+
 				<Form form={form} component={false}>
 					<Table
 						components={{
