@@ -52,6 +52,11 @@ const AddIngredient = (props: RouteComponentProps) => {
 					autoComplete='off'
 					name='Ingredient Form'
 					className='form'
+					initialValue={{
+						name : "",
+						stock : 0,
+						unit : UnitEnum.gram,
+					}}
 				>
 					<Form.Item
 						label='Ingredient name'
@@ -83,6 +88,7 @@ const AddIngredient = (props: RouteComponentProps) => {
 								required: true,
 							},
 						]}
+						initialValue={UnitEnum.gram}
 						className='form-row'
 					>
 						<UnitPicker onChange={(val) => {}} />
