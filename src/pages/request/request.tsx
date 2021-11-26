@@ -1,18 +1,21 @@
-import { Flex, Heading, Button, VStack } from "@chakra-ui/react";
-import { Table, Input, Button as AntButton, Space, Tag } from "antd";
-import { useState, useEffect, useRef, Key } from "react";
-import Highlighter from 'react-highlight-words';
-import { CheckCircleOutlined, CloseCircleOutlined, ExclamationCircleOutlined, SearchOutlined } from "@ant-design/icons";
+import {Flex, Heading, Button, VStack, useStyleConfig} from "@chakra-ui/react";
+import {Table, Input, Button as AntButton, Space, Tag} from "antd";
+import {useState, useEffect, useRef, Key} from "react";
+import Highlighter from "react-highlight-words";
+import {
+	CheckCircleOutlined,
+	CloseCircleOutlined,
+	ExclamationCircleOutlined,
+	SearchOutlined,
+} from "@ant-design/icons";
 
-import { IRequest } from "../../utils/interface";
-import { getRequests, updateRequest } from "../../services/request";
-import { ColumnGroupType, ColumnType } from "antd/lib/table";
-import { FilterConfirmProps } from "antd/lib/table/interface";
-import { DorayakiRequestStatus } from "../../utils/enum";
+import {IRequest} from "../../utils/interface";
+import {getRequests, updateRequest} from "../../services/request";
+import {ColumnGroupType, ColumnType} from "antd/lib/table";
+import {FilterConfirmProps} from "antd/lib/table/interface";
+import {DorayakiRequestStatus} from "../../utils/enum";
 import useAlert from "../../hooks/useAlert";
 import MiniAlert from "../../components/MiniAlert";
-import tablestyle from "../../styles/tablestyle";
-import headingstyle from "../../styles/headingstyle";
 
 interface ICombinedRequest extends IRequest {
 	recipe_name: string;
@@ -42,6 +45,10 @@ const RequestListPage = () => {
 	const {isVisible, status, message, showAlert} = useAlert();
 
 	const searchRef = useRef<any>();
+
+	const ContainerStyle = useStyleConfig("Container");
+	const HeadingStyle = useStyleConfig("Heading");
+	const TableStyle = useStyleConfig("Table");
 
 	const getColumnSearchProps = (
 		dataIndex: keyof ICombinedRequest
@@ -270,14 +277,8 @@ const RequestListPage = () => {
 	};
 
 	return (
-		<Flex
-			minH='100vh'
-			align='center'
-			justify='center'
-			bg='brand.gray'
-			direction='column'
-		>
-			<Heading marginBottom='5vh' style={headingstyle}>
+		<Flex __css={ContainerStyle}>
+			<Heading marginBottom='5vh' __css={HeadingStyle}>
 				Request List
 			</Heading>
 			<VStack spacing={5}>
@@ -288,7 +289,6 @@ const RequestListPage = () => {
 					pagination={{
 						pageSize: 10,
 					}}
-					style={tablestyle}
 				/>
 			</VStack>
 		</Flex>

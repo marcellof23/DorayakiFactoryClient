@@ -1,5 +1,12 @@
-import {Flex, Heading, Button, IconButton, FormLabel} from "@chakra-ui/react";
-import {ChevronLeftIcon} from "@chakra-ui/icons";
+import {
+	Flex,
+	Heading,
+	Button,
+	IconButton,
+	FormLabel,
+	Grid,
+} from "@chakra-ui/react";
+import {ChevronLeftIcon, CloseIcon} from "@chakra-ui/icons";
 import {Form, Input, InputNumber, Select} from "antd";
 import {useState, useEffect} from "react";
 import {RouteComponentProps, useHistory} from "react-router-dom";
@@ -29,6 +36,7 @@ const AddRecipe = (props: RouteComponentProps) => {
 		Array<ISelectedIngredient>
 	>([]);
 	const history = useHistory();
+	const [form] = Form.useForm();
 	const {isVisible, status, message, showAlert} = useAlert();
 
 	useEffect(() => {
@@ -75,8 +83,16 @@ const AddRecipe = (props: RouteComponentProps) => {
 			})
 		);
 		temp = [...temp, ...new_ingredient];
-		setSelectedIngredientID(val);
-		setSelectedIngredient(temp);
+		console.log("INI ID", val);
+		console.log("INI INGREDIENT", temp);
+		form.setFieldsValue({ingredients: val});
+		setSelectedIngredientID((_) => val);
+		setSelectedIngredient((_) => temp);
+	};
+
+	const removeIngredient = (val: number) => {
+		const res = selectedIngredientID.filter((row) => row !== val);
+		handleChangeSelect(res);
 	};
 
 	const handleIngredientChange = (
@@ -103,6 +119,10 @@ const AddRecipe = (props: RouteComponentProps) => {
 			showAlert("error", err.message);
 		}
 	};
+
+	useEffect(() => {
+		console.log("REFRESH!");
+	}, [selectedIngredient, selectedIngredientID]);
 
 	return (
 		<>
@@ -145,6 +165,7 @@ const AddRecipe = (props: RouteComponentProps) => {
 							onChange={handleChangeSelect}
 							value={selectedIngredientID}
 							showSearch
+							className='select-ingredient'
 						>
 							{filteredData.map((row: IIngredient) => (
 								<Select.Option
@@ -157,19 +178,31 @@ const AddRecipe = (props: RouteComponentProps) => {
 						</Select>
 					</Form.Item>
 					<Flex direction='column' alignItems='center' justifyContent='center'>
-						<Heading>Recipe Detail</Heading>
-						{selectedIngredient.map((row) => (
-							<Flex>
-								<FormLabel>{row.name}</FormLabel>
-								<InputNumber
-									value={row.qty_required}
-									onChange={(val) =>
-										handleIngredientChange(row.ingredient_id, val)
-									}
-								/>
-								<p>{row.unit}</p>
-							</Flex>
-						))}
+						<Heading marginBottom='2vh'>Recipe Detail</Heading>
+						<Grid
+							templateColumns='3fr 1fr auto auto'
+							alignItems='center'
+							width='100%'
+							gap='10px'
+						>
+							{[...selectedIngredient].map((row) => (
+								<>
+									<FormLabel>{row.name}</FormLabel>
+									<InputNumber
+										value={row.qty_required}
+										onChange={(val) =>
+											handleIngredientChange(row.ingredient_id, val)
+										}
+									/>
+									<p>{row.unit}</p>
+									<CloseIcon
+										color='red.500'
+										cursor='pointer'
+										onClick={() => removeIngredient(row.ingredient_id)}
+									/>
+								</>
+							))}
+						</Grid>
 					</Flex>
 					<Form.Item className='form-row-last'>
 						<Button type='submit' className='button'>

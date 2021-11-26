@@ -4,6 +4,7 @@ import headingstyle from "../styles/headingstyle";
 import RecipeLogo from "../public/recipe.png";
 import IngredientLogo from "../public/ingredient.png";
 import RequestLogo from "../public/request.png";
+import {useHistory} from "react-router-dom";
 
 const navs = [
 	{
@@ -24,6 +25,8 @@ const navs = [
 ];
 
 const Home = () => {
+	const history = useHistory();
+
 	return (
 		<Flex
 			minH='100vh'
@@ -54,7 +57,7 @@ const Home = () => {
 						borderRadius='small'
 						marginLeft='medium'
 						marginRight='medium'
-						onClick={() => (window.location.href = row.url)}
+						onClick={() => history.push(row.url)}
 					>
 						<Image
 							src={row.src}

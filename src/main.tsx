@@ -5,8 +5,16 @@ import App from './App'
 import "antd/dist/antd.css"
 import "./App.scss"
 import { UserProvider } from './context/UserContext'
+import ContainerStyle from "./styles/containerstyle";
+import HeadingStyle from "./styles/headingstyle";
+import TableStyle from "./styles/tablestyle";
 
 const theme = extendTheme({
+	components: {
+		Container: ContainerStyle,
+		Heading: HeadingStyle,
+		Table: TableStyle,
+	},
 	fonts: {
 		heading: "Playfair Display, Nunito Sans, sans-serif",
 		body: "Nunito Sans, sans-serif",

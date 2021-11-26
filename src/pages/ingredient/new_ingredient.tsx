@@ -80,6 +80,7 @@ const AddIngredient = (props: RouteComponentProps) => {
 							{
 								enum: ["gram", "ml", "tbsp", "tsp", "pcs"],
 								message: "Please input the proper unit",
+								required: true,
 							},
 						]}
 						className='form-row'
@@ -87,7 +88,16 @@ const AddIngredient = (props: RouteComponentProps) => {
 						<UnitPicker onChange={(val) => {}} />
 					</Form.Item>
 					<Form.Item className='form-row-last'>
-						<Button type='submit' className='button'>
+						<Button
+							type='submit'
+							className='button'
+							bgColor={"brand.primary"}
+							color={"brand.white"}
+							fontWeight={400}
+							_hover={{
+								bgColor: "brand.primaryFade",
+							}}
+						>
 							Submit
 						</Button>
 					</Form.Item>

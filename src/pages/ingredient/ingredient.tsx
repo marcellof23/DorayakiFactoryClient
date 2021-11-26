@@ -11,6 +11,7 @@ import UnitPicker from "../../components/UnitPicker";
 import tablestyle from "../../styles/tablestyle";
 import headingstyle from "../../styles/headingstyle";
 import useAlert from "../../hooks/useAlert";
+import {AddIcon} from "@chakra-ui/icons";
 
 interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
 	editing: boolean;
@@ -215,20 +216,34 @@ const Home = () => {
 			<Flex
 				minH='100vh'
 				align='center'
-				justify='center'
+				justify='flex-start'
 				bg='brand.gray'
 				direction='column'
+				padding='10vw'
 			>
-				<Heading marginBottom='5vh' style={headingstyle}>
+				<Heading marginBottom='2.5vh' style={headingstyle}>
 					Ingredient List
 				</Heading>
-				<Flex justify='flex-end' direction='row'>
-					<Typography.Link
-						disabled={editingRow !== -1}
+
+				<Flex
+					justify='flex-end'
+					direction='row'
+					width={"100%"}
+					paddingBottom='2.5vh'
+				>
+					<Button
+						rightIcon={<AddIcon />}
 						onClick={() => history.push("/ingredient/new")}
+						disabled={editingRow !== -1}
+						bgColor={"brand.primary"}
+						color={"brand.white"}
+						fontWeight={400}
+						_hover={{
+							bgColor: "brand.primaryFade",
+						}}
 					>
 						Add New Ingredient
-					</Typography.Link>
+					</Button>
 				</Flex>
 
 				<Form form={form} component={false}>

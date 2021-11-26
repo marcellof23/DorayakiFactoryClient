@@ -1,13 +1,12 @@
-import { Flex, Heading, Button } from "@chakra-ui/react";
-import { useHistory } from "react-router-dom";
-import { Table } from "antd";
-import { useState, useEffect } from "react";
-
-import { getRecipes } from "../../services/recipe";
-import {IIngredient, IIngredientsRecipe, IRecipe} from "../../utils/interface";
+import {Flex, Heading, Button, useStyleConfig} from "@chakra-ui/react";
+import {useHistory} from "react-router-dom";
+import {Table} from "antd";
+import {useState, useEffect} from "react";
 import {ColumnGroupType, ColumnType} from "antd/lib/table";
-import headingstyle from "../../styles/headingstyle";
-import tablestyle from "../../styles/tablestyle";
+
+import {getRecipes} from "../../services/recipe";
+import {IIngredientsRecipe, IRecipe} from "../../utils/interface";
+import {AddIcon} from "@chakra-ui/icons";
 
 type iColumns = ColumnGroupType<IRecipe> | ColumnType<IRecipe>;
 type iExtendedColumn =
@@ -17,6 +16,8 @@ type iExtendedColumn =
 const Home = () => {
 	const [data, setData] = useState<Array<IRecipe>>([]);
 	const history = useHistory();
+	const ContainerStyle = useStyleConfig("Container");
+	const HeadingStyle = useStyleConfig("Heading");
 
 	useEffect(() => {
 		async function getInitialData() {
@@ -83,24 +84,38 @@ const Home = () => {
 	};
 
 	return (
-		<Flex
-			minH='100vh'
-			align='center'
-			justify='center'
-			bg='brand.gray'
-			direction='column'
-		>
-			<Heading marginBottom='5vh' style={headingstyle}>
-				Recipe List
-			</Heading>
-			<Table
-				rowKey='recipe_id'
-				style={tablestyle}
-				dataSource={data}
-				columns={columns}
-				expandable={{expandedRowRender}}
-			></Table>
-		</Flex>
+		<>
+			<Flex __css={ContainerStyle}>
+				<Heading marginBottom='5vh' __css={HeadingStyle}>
+					Recipe List
+				</Heading>
+				<Flex
+					justify='flex-end'
+					direction='row'
+					width={"100%"}
+					paddingBottom='2.5vh'
+				>
+					<Button
+						rightIcon={<AddIcon />}
+						onClick={() => history.push("/recipe/new")}
+						bgColor={"brand.primary"}
+						color={"brand.white"}
+						fontWeight={400}
+						_hover={{
+							bgColor: "brand.primaryFade",
+						}}
+					>
+						Add New Recipe
+					</Button>
+				</Flex>
+				<Table
+					rowKey='recipe_id'
+					dataSource={data}
+					columns={columns}
+					expandable={{expandedRowRender}}
+				></Table>
+			</Flex>
+		</>
 	);
 };
 

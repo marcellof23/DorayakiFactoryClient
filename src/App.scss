@@ -32,12 +32,22 @@
     min-height: 30vh;
   }
 }
+.ant-form-item{
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
+
+.ant-form-item-label{
+  text-align: left;
+}
+
 .form-row-last{
   display: flex;
   flex-direction: row;
   align-items: flex-end;
   justify-content: flex-end;
   position: relative;
+  margin : 2.5vh 0;
   .button{
     width: fit-content;
     background-color: #546B5C;
@@ -47,8 +57,30 @@
     }
   }
 }
+
+.ant-form-item-control{
+  height: 5vh;
+}
+
+.select-ingredient{
+  height: 5vh;
+  div{
+    height: 100%;
+  }
+
+  span.ant-select-selection-item{
+    height : 90%;
+    align-items: center;
+  }
+}
+
 .ant-form-item-control-input-content{
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
+  label{
+    width: 100%;
+    text-align: left;
+  }
 }
+

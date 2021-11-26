@@ -8,12 +8,9 @@ import NewIngredient from "./pages/ingredient/new_ingredient";
 import Recipe from "./pages/recipe/recipe";
 import RecipeDetail from "./pages/recipe/recipe_detail";
 import AddRecipe from "./pages/recipe/new_recipe";
+import Navbar from "./components/Navbar";
 
 export const routes: Array<RouteProps> = [
-	{
-		path: "/",
-		component: Home,
-	},
 	{
 		path: "/login",
 		component: Login,
@@ -44,5 +41,9 @@ export const privateRoutes: Array<RouteProps> = [
 	{
 		path: "/recipe/:id",
 		component: RecipeDetail,
+	},
+	{
+		path: "/",
+		component: Home,
 	},
 ];
