@@ -24,7 +24,7 @@ const AddIngredient = (props: RouteComponentProps) => {
 				history.push(`/ingredient`);
 			}, 2000);
 		} catch (err: any) {
-			showAlert("error", err.message);
+			showAlert("error", err.response.data.message);
 		}
 	};
 
