@@ -1,0 +1,10 @@
+version: '3.7'
+
+services:
+  dorayaki-factory-client:
+    container_name: dorayaki-factory-client
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3000:80'
