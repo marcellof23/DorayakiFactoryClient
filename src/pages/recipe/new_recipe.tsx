@@ -113,10 +113,11 @@ const AddRecipe = (props: RouteComponentProps) => {
 			console.log("CREATING RECIPE", payload);
 			await createRecipe(payload);
 			setTimeout(() => {
-				// history.push(`/ingredient`);
+				history.push(`/recipe`);
 			}, 2000);
 		} catch (err: any) {
-			showAlert("error", err.message);
+			console.log(err)
+			showAlert("error", err.response.data.message);
 		}
 	};
 
